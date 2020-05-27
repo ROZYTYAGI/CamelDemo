@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.camel_demo</groupId>
-	<artifactId>CamelDemo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>camel_demo</artifactId>
+	<version>0.1</version>
 	<name>CamelDemo</name>
 	<description>Demo project for Spring Boot</description>
 
