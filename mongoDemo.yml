@@ -1,0 +1,37 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodemo
+  template:
+    metadata:
+      labels:
+        app: mongodemo
+    spec:
+      containers:
+        - name: app
+          image: gcr.io/dockerkb/mongodemo
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.data.mongodb.host
+              value: mongodemodb
+          imagePullPolicy: Always
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodemo
+spec:
+  selector:
+    app: mongodemo
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: LoadBalancer
