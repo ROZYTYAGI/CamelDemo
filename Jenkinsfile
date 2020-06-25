@@ -36,7 +36,7 @@ pipeline {
     }
     stage('Deploy to GKE') {
        steps{
-               sh ("kubectl set image deployment/mongodemo mongodemo=8979635092/test:latest")
+             
             sh "kubectl get pods"
                  }
            
