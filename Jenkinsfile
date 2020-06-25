@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-  agent none
+  agent any
    environment {
         PROJECT_ID = 'fiery-bay-277309'
         CLUSTER_NAME = 'mongodemo'
