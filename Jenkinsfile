@@ -22,15 +22,15 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-         myapp = docker.build("8979635092/test:${env.BUILD_ID}")
+         sh 'docker build -t 8979635092/test:latest .'
       }
     }
     stage('Docker Push') {
       agent any
       steps {
-         docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
+        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push 8979635092/test:latest'
         }
       }
     }
