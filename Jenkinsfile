@@ -2,6 +2,12 @@
 
 pipeline {
   agent none
+   environment {
+        PROJECT_ID = 'fiery-bay-277309'
+        CLUSTER_NAME = 'mongodemo'
+        LOCATION = '/home/tyagirozy4'
+        CREDENTIALS_ID = 'gke'
+    }
   stages {
     stage('Maven Install') {
       agent {
@@ -28,5 +34,11 @@ pipeline {
         }
       }
     }
+    stage('Deploy to GKE') {
+            steps{
+                sh "sed -i 's/mongodemo:latest/mongodemo:${env.BUILD_ID}/g' mongoDemo.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'mongoDemo.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+            }
+        }
   }
 }
