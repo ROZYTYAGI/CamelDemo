@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: gcr.io/dockerkb/mongodemo
+          image: 8979635092/test:latest
           ports:
             - containerPort: 8080
           env:
