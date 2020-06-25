@@ -22,21 +22,21 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t 8979635092/test:latest .'
+         myapp = docker.build("8979635092/test:${env.BUILD_ID}")
       }
     }
     stage('Docker Push') {
       agent any
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push 8979635092/test:latest'
+         docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
         }
       }
     }
     stage('Deploy to GKE') {
             steps{
-                sh "sed -i 's/mongodemo:latest/mongodemo:${env.BUILD_ID}/g' mongoDemo.yml"
+                sh "sed -i 's/test:latest/test:${env.BUILD_ID}/g' mongoDemo.yml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'mongoDemo.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
