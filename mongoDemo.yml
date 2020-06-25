@@ -14,10 +14,10 @@ spec:
         app: mongodemo
     spec:
       containers:
-        - name: app
+        - name: mongodemo
           image: 8979635092/test:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8082
           env:
             - name: spring.data.mongodb.host
               value: mongodemodb
@@ -32,6 +32,6 @@ spec:
   selector:
     app: mongodemo
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8082
+      targetPort: 8082
   type: LoadBalancer
