@@ -36,7 +36,7 @@ pipeline {
     }
     stage('Deploy to GKE') {
        steps{
-            sh 'kubectl apply -f mongoDemo.yml'
+          
         sh 'kubectl set image deployments/mongodemo app=8979635092/test:${BUILD_NUMBER}'
                  }
            
