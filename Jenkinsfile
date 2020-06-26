@@ -28,13 +28,6 @@ pipeline {
         }
       }
     }
-     stage('Apply Kubernetes Files') {
-      steps {
-          withKubeConfig([credentialsId: 'gke']) {
-          sh 'cat mongoDemo.yml | sed "s/latest/latest/g" | kubectl apply -f -'
-         
-        }
-      }
-  }
+   
   }
 }
