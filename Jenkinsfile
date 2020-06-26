@@ -24,14 +24,14 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push 8979635092/test:${env.BUILD_NUMBER}'
+          sh 'docker push 8979635092/test:latest'
         }
       }
     }
      stage('Apply Kubernetes Files') {
       steps {
           withKubeConfig([credentialsId: 'gke']) {
-          sh 'cat mongoDemo.yml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+          sh 'cat mongoDemo.yml | sed "s/latest/latest/g" | kubectl apply -f -'
          
         }
       }
