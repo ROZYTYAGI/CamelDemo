@@ -41,35 +41,10 @@ public class ViewInBrowser {
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public @ResponseBody String startCamel(HttpServletResponse response) {
 		log.info("in controller ::::::: ");
-/*
-		producerTemplate.sendBody("direct:viewInBrouser","helolo");
-		String template = consumerTemplate.receiveBody("seda:endRoute", String.class);
 
-		log.info("++++++++++ " + template);*/
-		 MongoClient mongo = new MongoClient( "localhost" , 27017 ); 
-		    
-		    
-		    //Accessing the database 
-		    MongoDatabase database = mongo.getDatabase("myDb");  
-		    
-		    //Creating a collection 
-		    database.createCollection("sampleCollection");
-		    MongoCollection<Document> collection = database.getCollection("sampleCollection");
-			System.out.println("Collection sampleCollection selected successfully");
-			Document document = new Document("title", "MongoDB")
-			.append("description", "database")
-			.append("likes", 100)
-			.append("url", "http://www.tutorialspoint.com/mongodb/")
-			.append("by", "tutorials point");
-			
-			//Inserting document into the collection
-			collection.insertOne(document);
 			System.out.println("Document inserted successfully");
 			
 	
-
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
 		return "hello world";
 	}
 
