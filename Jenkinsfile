@@ -2,13 +2,7 @@
 
 pipeline {
   agent any
-   environment {
-        PROJECT_ID = 'fiery-bay-277309'
-        CLUSTER_NAME = 'mongodemo'
-        LOCATION = '/home/tyagirozy4'
-        CREDENTIALS_ID = 'gke'
-    }
-  stages {
+    stages {
     stage('Maven Install') {
       agent {
         docker {
@@ -30,22 +24,17 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push 8979635092/test:latest'
+          sh 'docker push 8979635092/test:${env.BUILD_NUMBER}'
         }
       }
     }
-    stage('Deploy to GKE') {
-       steps{
-           withKubeCredentials([
-        [credentialsId: 'gke', serverUrl: '23.251.131.13']
-      
-    ]) {
-     sh 'kubectl apply -f mongoDemo.yml'
-        sh 'kubectl set image deployments/mongodemo app=8979635092/test:${BUILD_NUMBER}'
+     stage('Apply Kubernetes Files') {
+      steps {
+          withKubeConfig([credentialsId: 'gke']) {
+          sh 'cat mongoDemo.yml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
          
-           }
-                 }
-           
         }
+      }
+  }
   }
 }
