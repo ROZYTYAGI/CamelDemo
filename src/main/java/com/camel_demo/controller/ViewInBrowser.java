@@ -40,9 +40,9 @@ public class ViewInBrowser {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public @ResponseBody String startCamel(HttpServletResponse response) {
-		log.info("in controller ::::::: ");
+		
 
-			System.out.println("Document inserted successfully");
+			
 			
 	
 		return "hello world";
