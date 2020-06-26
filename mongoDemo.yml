@@ -1,14 +1,7 @@
+
 # ...new docker image Deployment YAML definition
 apiVersion: apps/v1
-namespace: ZGVmYXVsdA==
-  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluZzRkMmwyUm0xWFJtaGxTMmxaYURWT2NGWnBUMHhxVWxoc1pWRnNTSEE0TUZaVVNIbDJVWGQwZUVraWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekw
-zTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUprWldaaGRXeDBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmp
-iM1Z1ZEM5elpXTnlaWFF1Ym1GdFpTSTZJbVJsWm1GMWJIUXRkRzlyWlc0dFoySmtOamdpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxjblpwWTJVdFlXTmpiM1Z1ZEM1dVlXMWxJam9
-pWkdWbVlYVnNkQ0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJak14WWpGbE4yVTRMVFU0TTJRdE5HWTFZaTA0TUdKbExUQmxaak0zWXp
-jeE5UQTNaQ0lzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwa1pXWmhkV3gwT21SbFptRjFiSFFpZlEuUVdaMFh2ZjRaQk1naXExX1dfRndsSkJieXV5eG9VckoxNWlKbjhZMkg0YnVyNW02eVV
-GUXlJZEgyZ0ZCYjhfWmgxTXBncmdlaG4xQXZrSnE3MnRqdU5OdmJQdlVFNGpGbmVwNS1xRXZDNjlMQVdmcWhOSVljQlZqRmZJcjY5QjZSVkRvOC0yYnVLXzRCLWpEd0JaMVdkVFhJenVPZ19DaldUSjFvbktzYURCam1
-Da0VsendBSVEwSmRSWFlyc185Mi1sUE91ZTNNeWE2U0NkS0I0MzlQSG15Z05KRjloSEV4WlozQzR4R0JGZ1V4ZC03NWZOaU1ZTU9ZUVZncmJqQU1HUGlCcFNSVzFnd2NpWFVPaFRlSWpGWDJPZjF3UjhSeW5YSU1HSUF
-CWnJzZW11M0dEelkwWGYzeUlrbU82bktGN2RaRjlnN1BIRzF0UEpTTXNmUDNn
+
 kind: Deployment
 metadata:
   name: mongodemo
@@ -26,7 +19,7 @@ spec:
         - name: app
           image: 8979635092/test:latest
           ports:
-            - containerPort: 8082
+            - containerPort: 8080
           env:
             - name: spring.data.mongodb.host
               value: mongodemodb
@@ -41,6 +34,8 @@ spec:
   selector:
     app: mongodemo
   ports:
-    - port: 8082
-      targetPort: 8082
+    - port: 8080
+      targetPort: 8080
   type: LoadBalancer
+ 
+
