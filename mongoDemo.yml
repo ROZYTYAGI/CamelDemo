@@ -15,7 +15,6 @@ spec:
       labels:
         app: mongodemo
     spec:
-     terminationGracePeriodSeconds: 30
       containers:
         - name: app
           image: 8979635092/test:latest
