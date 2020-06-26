@@ -45,7 +45,7 @@ public class ViewInBrowser {
 			
 			
 	
-		return "hello worlds...";
+		return "this is my first demo project.";
 	}
 
 	
